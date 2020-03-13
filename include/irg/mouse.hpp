@@ -24,9 +24,9 @@ namespace irg {
         return;
 
       int width, height;
-      glfwGetWindowSize(w, &width, &height);
+      ::glfwGetWindowSize(w, &width, &height);
 
-      ls.end = {xpos / width * 2.0 - 1.0, -ypos / height * 2.0 + 1.0};
+      ls.end = normalize({xpos, ypos}, {width, height});
 
       on_move(ls);
     }
@@ -36,18 +36,17 @@ namespace irg {
         return;
 
       double xpos, ypos;
-      glfwGetCursorPos(w, &xpos, &ypos);
+      ::glfwGetCursorPos(w, &xpos, &ypos);
       
       int width, height;
-      glfwGetWindowSize(w, &width, &height);
+      ::glfwGetWindowSize(w, &width, &height);
 
-      float x = xpos / width * 2.0 - 1.0;
-      float y = -ypos / height * 2.0 + 1.0;
+      point p = normalize({xpos, ypos}, {width, height});
 
       if (!tracking)
-        ls.start = {x, y};
+        ls.start = p;
       else
-        ls.end = {x, y},
+        ls.end = p,
         on_finalize(ls);
 
       tracking = !tracking;

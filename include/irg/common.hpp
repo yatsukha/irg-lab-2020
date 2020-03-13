@@ -42,6 +42,7 @@ namespace irg {
       terminate("Unable to create a window.");
 
     ::glfwMakeContextCurrent(w);
+    ::glfwSetWindowPos(w, 100, 100);
 
     if (!::gladLoadGLLoader(
           reinterpret_cast<::GLADloadproc>(::glfwGetProcAddress)))

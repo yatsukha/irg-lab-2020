@@ -12,6 +12,12 @@ namespace irg {
   struct point {
     float x;
     float y;
+
+    friend void swap(point& a, point& b) noexcept {
+      using ::std::swap;
+      swap(a.x, b.x);
+      swap(a.y, b.y);
+    }
   };
 
   inline point normalize(point const& p, point const& dim) noexcept {
@@ -91,67 +97,27 @@ namespace irg {
       bool swapped = ::std::abs(db) >= 1.0;
       ::std::vector<point> points;
 
+      using ::std::swap;
+
       if (swapped)
-        ::std::swap(n.start.x, n.start.y),
-        ::std::swap(n.end.x, n.end.y),
+        swap(n.start.x, n.start.y),
+        swap(n.end.x, n.end.y),
         db = 1.0 / db;
 
-      if (n.start.x > n.end.x) {
-        point tmp = n.start;
-        n.start = n.end;
-        n.end = tmp;
-      }
+      if (n.start.x > n.end.x)
+        swap(n.start, n.end);
 
       float ydelta = db >= 0.0 ? 1.0 : -1.0;
       float d = db - ydelta / 2.0;
       float y = n.start.y;
 
-      for (float x = n.start.x; x <= n.end.x; x += 1.0) {
+      for (float x = n.start.x; x < n.end.x; x += 1.0) {
         points.push_back(normalize(swapped ? point{y, x} : point{x, y}, dim));
         if (ydelta * d >= 0.0)
-          y += ydelta,
+          y += ydelta, 
           d -= ydelta;
         d += db;
       }
-
-
-      /* if (::std::abs(db) < 1.0) {// only small code duplication :^)
-        if (n.start.x > n.end.x) {
-          point tmp = n.start;
-          n.start = n.end;
-          n.end = tmp;
-        }
-
-        float ydelta = db >= 0.0 ? 1.0 : -1.0;
-        float d = db - ydelta / 2.0;
-        float y = n.start.y;
-        for (float x = n.start.x; x <= n.end.x; x += 1.0) {
-          points.push_back(normalize({x, y}, dim));
-          if (ydelta * d >= 0.0)
-            y += ydelta,
-            d -= ydelta;
-          d += db;
-        }
-      } else {
-        if (n.start.y > n.end.y) {
-          point tmp = n.start;
-          n.start = n.end;
-          n.end = tmp;
-        }
-
-        db = 1.0 / db;
-        float xdelta = db >= 0.0 ? 1.0 : -1.0;
-        float d = db - xdelta / 2.0;
-        float x = n.start.x;
-        for (float y = n.start.y; y <= n.end.y; y += 1.0) {
-          points.push_back(normalize({x, y}, dim));
-          if (xdelta * d >= 0.0)
-            x += xdelta,
-            d -= xdelta;
-          d += db;
-        }
-      } */
-      
 
       unsigned VAO, VBO;
       glGenVertexArrays(1, &VAO);
