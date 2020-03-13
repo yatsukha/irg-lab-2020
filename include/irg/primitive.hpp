@@ -133,6 +133,9 @@ namespace irg {
       glEnableVertexAttribArray(0);
 
       glDrawArrays(GL_POINTS, 0, points.size());
+
+      glDeleteVertexArrays(1, &VAO);
+      glDeleteBuffers(1, &VBO);
     }
 
     void update(line_segment const& ls) override {

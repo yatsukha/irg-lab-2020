@@ -25,7 +25,7 @@ int main() {
     lines[lines.size() - 2]->update(data);
     ::irg::line_segment offset = data;
     offset.start.y -= 0.02;
-    offset.end.y -= 0.02;
+    offset.end.y   -= 0.02;
     lines[lines.size() - 1]->update(offset);
   };
 
