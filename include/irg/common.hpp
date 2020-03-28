@@ -20,57 +20,14 @@ namespace irg {
     callable c;
   };
 
-  void terminate(char const* err) {
-    ::std::cerr << err << "\n";
-    ::std::exit(EXIT_FAILURE);
-  }
+  void terminate(char const* err);
 
-  on_scope_exit init(int const major_version = 3, int const minor_version = 3) {
-    ::glfwInit();
-    ::glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major_version);
-    ::glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor_version);
-    ::glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    ::glfwSwapInterval(1);
+  void assert_no_error();
 
-    return on_scope_exit{::glfwTerminate};
-  }
+  on_scope_exit init(int const major_version = 3, int const minor_version = 3);
 
-  ::GLFWwindow* create_window(int const width = 800, int const height = 600) {
-    ::GLFWwindow* w = ::glfwCreateWindow(width, height, "", nullptr, nullptr);
+  ::GLFWwindow* create_window(int const width = 800, int const height = 600);
 
-    if (!w)
-      terminate("Unable to create a window.");
-
-    ::glfwMakeContextCurrent(w);
-    ::glfwSetWindowPos(w, 100, 100);
-
-    if (!::gladLoadGLLoader(
-          reinterpret_cast<::GLADloadproc>(::glfwGetProcAddress)))
-      terminate("Unable to initialize GLAD.");
-
-    glViewport(0, 0, width, height);
-    glfwSetFramebufferSizeCallback( // resizing
-      w, [](auto*, auto const w, auto const h) { glViewport(0, 0, w, h); });
-
-    return w;
-  }
-
-  namespace detail {
-    void default_inputs(::GLFWwindow* window) {
-      if (::glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        ::glfwSetWindowShouldClose(window, true);
-    }
-  }
-
-  void window_loop(::GLFWwindow* window, ::std::function<void(void)> render) {
-    while (!::glfwWindowShouldClose(window)) {
-      detail::default_inputs(window);
-
-      render();
-
-      ::glfwPollEvents();
-      ::glfwSwapBuffers(window);
-    }
-  }
+  void window_loop(::GLFWwindow* window, ::std::function<void(void)> render);
 
 }
