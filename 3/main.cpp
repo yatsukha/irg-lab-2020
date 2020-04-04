@@ -32,7 +32,7 @@ int main() {
       if (!sp)
         sp.reset(
           new ::irg::scanline_polygon(
-            point, shader_program, ::irg::m_events, ::irg::k_events
+            point, shader_program, ::irg::m_events, ::irg::k_events, window
           )
         );
     },

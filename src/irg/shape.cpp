@@ -121,16 +121,15 @@ namespace irg {
   //
 
   scanline_polygon::scanline_polygon(point const& p, shader_program const sp, 
-                                     mouse_events& me, keyboard_events& ke)
-    : shape(sp), vertices({homogenous(p), homogenous(p)}) 
+                                     mouse_events& me, keyboard_events& ke,
+                                     ::GLFWwindow* w)
+    : shape(sp), vertices({homogenous(p), homogenous(p)}), w(w)
   {
     me.add_listener({
       {},
       [this](auto const& ls) {
-        if (!last_point)
+        if (!shape::locked)
           vertices.back() = homogenous(ls.end);
-        else
-          shape::locked = true;
       },
       [this](auto const& ls) {
         if (shape::locked)
@@ -144,33 +143,75 @@ namespace irg {
     });
 
     ke.add_listener([this](int const key) {
-      if (key == GLFW_KEY_F) {
-        this->last_point = true;
-        this->assert_clockwise();
-        return ob::action::detach;
-      } else {
-        return ob::action::remain;
+      if (key == GLFW_KEY_F && !shape::locked) {
+        shape::locked = true;
+        this->finalize();
+      } else if (key == GLFW_KEY_DOWN) {
+        this->delta_multiplier *= 2.0f;
+      } else if (key == GLFW_KEY_UP) {
+        this->delta_multiplier /= 2.0f;
       }
+
+      return ob::action::remain;
     });
   }
 
-  void scanline_polygon::assert_clockwise() {
-    ::glm::vec3 anchor{10.0f, 10.0f, 1.0f};
-
+  void scanline_polygon::finalize() {
     auto clockwise = true;
     auto n = vertices.size();
 
-    for (auto i = 0; clockwise && i < n; ++i)
-      if (::glm::dot(
+    float ymin = 1.5f;
+    ::std::size_t ymin_idx = 0;
+
+    for (auto i = 0; i < n; ++i) {
+      if (clockwise && ::glm::dot(
             vertices[(i + 2) % n], 
             ::glm::cross(vertices[i], vertices[(i + 1) % n])
           ) > 0.0f)
         clockwise = false;
+
+      if (vertices[i].y < ymin)
+        ymin = vertices[i].y,
+        ymin_idx = i;
+    }
     
     if (!clockwise)
       ::std::cout << "Polygon is either not clockwise or not convex." 
                   << "\n",
-      ::std::reverse(vertices.begin(), vertices.end());
+      ::std::reverse(vertices.begin(), vertices.end()),
+      ymin_idx = vertices.size() - 1 - ymin_idx;
+
+    for (auto i = ymin_idx;; i = (i + 1) % n) {
+      if (auto& a = vertices[i], & b = vertices[(i + 1) % n]; a.y < b.y)
+        edges[0].insert(edges[0].begin(), {
+          {b.y, a.y},
+          [&b, r = (a.x - b.x) / (a.y - b.y)](float const y) -> float {
+            return (y - b.y) * r + b.x;
+          }
+        });
+      else
+        edges[1].push_back({
+          {a.y, b.y},
+          [&a, r = (a.x - b.x) / (a.y - b.y)](float const y) -> float {
+            return (y - a.y) * r + a.x;
+          }
+        });
+
+      if ((i + 1) % n == ymin_idx)
+        break;
+    }
+
+    ::std::cout << "Left edges (y coordinates): ";
+    for (auto const& e : edges[0])
+      ::std::cout << e.y_cords << " ";
+
+    ::std::cout << "\n";
+
+    ::std::cout << "Right edges (y coordinates): ";
+    for (auto const& e : edges[1])
+      ::std::cout << e.y_cords << " ";
+
+    ::std::cout << "\n";
   }
 
   bool scanline_polygon::is_inside(point const& p) {
@@ -204,8 +245,52 @@ namespace irg {
 
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(::glm::vec3), nullptr);
     glEnableVertexAttribArray(0);
-
     glDrawArrays(shape::locked ? GL_LINE_LOOP : GL_LINE_STRIP, 0, vertices.size());
+    
+    if (!filled)
+      return;
+
+    int width, height;
+    ::glfwGetWindowSize(w, &width, &height);
+
+    point y_extremes = {edges[0].front().y_cords.x, edges[0].back().y_cords.y};
+
+    float subheight = (y_extremes.x - y_extremes.y);
+    float delta = subheight / height * delta_multiplier;
+
+    ::std::vector<line_segment> lines; lines.reserve(subheight / delta);
+    ::std::size_t indices[2]{ 0, 0 };
+
+    for (float y = y_extremes.x; y >= y_extremes.y; y -= delta) {
+      while (y < edges[0][indices[0]].y_cords.y)
+        ++indices[0];
+      while (y < edges[1][indices[1]].y_cords.y)
+        ++indices[1];
+
+      lines.push_back(
+        {{edges[0][indices[0]].line(y), y}, {edges[1][indices[1]].line(y), y}}
+      );
+    }
+
+    unsigned lVAO, lVBO;
+    glGenVertexArrays(1, &lVAO);
+    glBindVertexArray(lVAO);
+    glGenBuffers(1, &lVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, lVBO);
+
+    on_scope_exit lines_guard{[&]{
+      glDeleteVertexArrays(1, &lVAO);
+      glDeleteBuffers(1, &lVBO);
+    }};
+
+    glBufferData(
+      GL_ARRAY_BUFFER, sizeof(line_segment) * lines.size(),
+      reinterpret_cast<float const*>(lines.data()), GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(point), nullptr);
+    glEnableVertexAttribArray(0);
+    glDrawArrays(GL_LINES, 0, lines.size() * 2);
+
     assert_no_error();
   }
   

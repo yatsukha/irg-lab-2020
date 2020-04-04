@@ -26,6 +26,11 @@ namespace irg {
     unit x;
     unit y;
 
+    friend ::std::ostream& operator<<(::std::ostream& out, point const& p) {
+      out << "(" << p.x << ", " << p.y << ")";
+      return out;
+    }
+
     friend void swap(point& a, point& b) noexcept {
       using ::std::swap;
       swap(a.x, b.x);
@@ -48,6 +53,11 @@ namespace irg {
   template<typename Point>
   inline ::glm::vec3 homogenous(Point&& p) noexcept {
     return ::glm::vec3{p.x, p.y, 1.0f};
+  }
+
+  template<typename Vec3>
+  inline point non_homogenous(Vec3&& v) noexcept {
+    return point{v.x, v.y};
   }
 
   struct line_segment {

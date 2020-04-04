@@ -3,6 +3,7 @@
 #include <iostream>
 #include <optional>
 #include <algorithm>
+#include <functional>
 
 #include <glm/glm.hpp>
 
@@ -66,7 +67,7 @@ namespace irg {
 
   class bresenham_line : public shape {
    private:
-    GLFWwindow* w;
+    ::GLFWwindow* w;
     line_segment ls;
 
     line_segment adjust(line_segment ls) noexcept {
@@ -76,7 +77,7 @@ namespace irg {
     }
 
    public:
-    bresenham_line(GLFWwindow* w, point const start, shader_program const sp,
+    bresenham_line(::GLFWwindow* w, point const start, shader_program const sp,
                    mouse_events& me);
 
     void draw() const override;
@@ -138,15 +139,26 @@ namespace irg {
   };
 
   class scanline_polygon : public shape {
+    ::GLFWwindow* w;
     ::std::vector<::glm::vec3> vertices;
-    bool last_point = false;
-    bool filled     = false;
+    bool filled = false;
+    float delta_multiplier = 1.0f;
 
-    void assert_clockwise();
+    struct edge {
+      point y_cords;
+      ::std::function<float(float const)> line;
+    };
+
+    ::std::vector<edge> edges[2] {
+      ::std::vector<edge>{},
+      ::std::vector<edge>{}
+    };
+
+    void finalize();
 
    public:
     scanline_polygon(point const& p, shader_program const sp, mouse_events& me,
-                     keyboard_events& ke);
+                     keyboard_events& ke, ::GLFWwindow* w);
 
     bool is_final() { return shape::locked; }
     bool is_inside(point const& p);
