@@ -91,6 +91,13 @@ namespace irg {
       glUniform3f(glGetUniformLocation(*id, uniform_name), c.r, c.g, c.b);
     }
 
+    void set_uniform_vec3(char const* uniform_name, ::glm::vec3 const &v) {
+      glUniform3fv(
+        glGetUniformLocation(*id, uniform_name), 
+        1, ::glm::value_ptr(v)
+      );
+    }
+
     ::glm::mat4 get_uniform_matrix(char const* uniform_name) {
       ::std::unique_ptr<float[]> mat(new float[16]);
       glGetUniformfv(*id, glGetUniformLocation(*id, uniform_name), mat.get());
@@ -104,6 +111,11 @@ namespace irg {
         1, GL_FALSE, ::glm::value_ptr(m)
       );
     }
+
+    void transform_matrix(char const* uniform_name, ::glm::mat4 const& m) {
+      set_uniform_matrix(uniform_name, m * get_uniform_matrix(uniform_name));
+    }
+    
   };
 
 }

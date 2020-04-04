@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <utility>
 
 #include <glm/glm.hpp>
 
@@ -15,11 +16,14 @@ namespace irg {
     using index_data = ::std::vector<unsigned>;
 
    private:
+    using vertex_normal = ::std::pair<::glm::vec3, ::glm::vec4>;
+    using buffer_data  = ::std::vector<vertex_normal>;
+
     shader_program mutable mesh_shader;
-    unsigned VAO, VBO, EBO;
+    unsigned VAO, VBO;
     unsigned indice_size;
 
-    static void normalize_data(vertex_data& vertices, index_data& indices);
+    static buffer_data normalize_data(vertex_data& vertices, index_data& indices);
 
    public:
     mesh(vertex_data& vertices, index_data& indices, 

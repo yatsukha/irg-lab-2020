@@ -6,7 +6,17 @@
 
 namespace irg {
 
-  void mesh::normalize_data(vertex_data& vertices, index_data& indices) {
+  namespace detail {
+
+    inline ::glm::vec3 normal(::glm::vec3 const& a, ::glm::vec3 const& b, 
+                              ::glm::vec3 const& c) noexcept {
+      return ::glm::cross(b - a, c - a);
+    }
+
+  }
+
+  mesh::buffer_data mesh::normalize_data(vertex_data& vertices, 
+                                         index_data& indices) {
     for (auto& i : indices)
       --i;
 
@@ -22,21 +32,43 @@ namespace irg {
         extremes[i][1] = ::std::max(extremes[i][1], v[i]);
 
     ::glm::vec3 factors{
-      1.0f / (extremes[0][1] - extremes[0][0]),
-      1.0f / (extremes[1][1] - extremes[1][0]),
-      1.0f / (extremes[2][1] - extremes[2][0])
+      2.0f / (extremes[0][1] - extremes[0][0]),
+      2.0f / (extremes[1][1] - extremes[1][0]),
+      2.0f / (extremes[2][1] - extremes[2][0])
     };
 
     for (auto& v : vertices)
       for (auto i = 0; i < v.length(); ++i)
-        v[i] = -0.5f + (v[i] - extremes[i][0]) * factors[i];
+        v[i] = -1.0f + (v[i] - extremes[i][0]) * factors[i];
+    
+    buffer_data data;
+    data.reserve(indices.size());
+
+    for (auto i = 0; i < indices.size(); i += 3) {
+      auto normal = 
+      detail::normal(
+        vertices[indices[i]], 
+        vertices[indices[i + 1]], 
+        vertices[indices[i + 2]]);
+
+      for (auto j = 0; j < 3; ++j)
+        data.emplace_back(
+          vertices[indices[i + j]],
+          ::glm::vec4{
+            normal.x, normal.y, normal.z, 
+            -::glm::dot(vertices[indices[i + j]], normal)
+          }
+        );
+    }
+
+    return data;
   }
 
   mesh::mesh(vertex_data& vertices, index_data& indices, 
              shader_program const& mesh_shader)
     : mesh_shader(mesh_shader), indice_size(indices.size())
   {
-    normalize_data(vertices, indices);
+    auto data = normalize_data(vertices, indices);
 
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
@@ -45,25 +77,22 @@ namespace irg {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(
       GL_ARRAY_BUFFER, 
-      sizeof(vertex_data::value_type) * vertices.size(),
-      vertices.data(), 
-      GL_STATIC_DRAW
-    );
-
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(
-      GL_ELEMENT_ARRAY_BUFFER,
-      sizeof(index_data::value_type) * indices.size(),
-      indices.data(),
+      sizeof(buffer_data::value_type) * data.size(),
+      data.data(), 
       GL_STATIC_DRAW
     );
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(
       0, 3, GL_FLOAT, GL_FALSE, 
-      sizeof(::std::remove_reference_t<decltype(vertices)>::value_type), 
-      nullptr
+      sizeof(buffer_data::value_type), nullptr
+    );
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(
+      1, 3, GL_FLOAT, GL_FALSE, 
+      sizeof(buffer_data::value_type), 
+      reinterpret_cast<void*>(sizeof(buffer_data::value_type::first_type))
     );
   }
 
@@ -71,14 +100,13 @@ namespace irg {
     mesh_shader.activate();
     glBindVertexArray(VAO);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glDrawElements(GL_TRIANGLES, indice_size, GL_UNSIGNED_INT, nullptr);
+    glDrawArrays(GL_TRIANGLES, 0, indice_size);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   }
 
   mesh::~mesh() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
   }
 
   mesh mesh::from_file(char const* mesh_file, shader_program const& mesh_shader) {
