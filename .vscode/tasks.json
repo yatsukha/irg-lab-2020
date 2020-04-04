@@ -24,7 +24,7 @@
         "${workspaceFolder}/src/**/*.c(.N)",
 
         // program source files
-        "${workspaceFolder}/3/main.cpp",
+        "${workspaceFolder}/4/main.cpp",
 
         // output
         "-o",
