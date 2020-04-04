@@ -1,5 +1,8 @@
 #include <irg/common.hpp>
 
+#include <irg/mouse.hpp>
+#include <irg/keyboard.hpp>
+
 namespace irg {
 
   void terminate(char const* err) {
@@ -60,6 +63,13 @@ namespace irg {
       ::glfwPollEvents();
       ::glfwSwapBuffers(window);
     }
+  }
+
+  void bind_events(::GLFWwindow* window) {
+    ::glfwSetMouseButtonCallback(window, ::irg::mouse_events::click_callback);
+    ::glfwSetCursorPosCallback(window, ::irg::mouse_events::move_callback);
+
+    ::glfwSetKeyCallback(window, ::irg::keyboard_events::callback);
   }
 
 }

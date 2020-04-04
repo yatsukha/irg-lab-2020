@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <optional>
+#include <algorithm>
+
+#include <glm/glm.hpp>
 
 #include <irg/common.hpp>
 #include <irg/mouse.hpp>
@@ -132,6 +135,26 @@ namespace irg {
       auto sz = vertices.size();
       glDrawArrays(sz < 3 || (vertices[1] == vertices[2]) ? GL_LINES : GL_TRIANGLE_FAN, 0, sz);
     }
+  };
+
+  class scanline_polygon : public shape {
+    ::std::vector<::glm::vec3> vertices;
+    bool last_point = false;
+    bool filled     = false;
+
+    void assert_clockwise();
+
+   public:
+    scanline_polygon(point const& p, shader_program const sp, mouse_events& me,
+                     keyboard_events& ke);
+
+    bool is_final() { return shape::locked; }
+    bool is_inside(point const& p);
+
+    void set_filled(bool const filled) { this->filled = filled; }
+
+    void draw() const override;
+
   };
 
 }

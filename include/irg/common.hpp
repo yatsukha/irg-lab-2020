@@ -30,4 +30,6 @@ namespace irg {
 
   void window_loop(::GLFWwindow* window, ::std::function<void(void)> render);
 
+  void bind_events(::GLFWwindow* window);
+
 }

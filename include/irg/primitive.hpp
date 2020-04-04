@@ -6,6 +6,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 namespace irg {
 
@@ -42,6 +43,11 @@ namespace irg {
 
   inline point scale(point const& p, point const& dim) noexcept {
     return {(p.x + 1.0f) / 2.0f * dim.x, (p.y - 1.0f) / 2.0f * dim.y * -1.0f};
+  }
+
+  template<typename Point>
+  inline ::glm::vec3 homogenous(Point&& p) noexcept {
+    return ::glm::vec3{p.x, p.y, 1.0f};
   }
 
   struct line_segment {
