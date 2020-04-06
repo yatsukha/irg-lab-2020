@@ -10,6 +10,7 @@
         "-O0",
         "-std=c++17",
         "-g",
+        // "-fsanitize=address",
 
         // library include directories
         "-I${workspaceFolder}/include",
@@ -24,7 +25,7 @@
         "${workspaceFolder}/src/**/*.c(.N)",
 
         // program source files
-        "${workspaceFolder}/4/main.cpp",
+        "${workspaceFolder}/3/main.cpp",
 
         // output
         "-o",

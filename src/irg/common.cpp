@@ -2,6 +2,7 @@
 
 #include <irg/mouse.hpp>
 #include <irg/keyboard.hpp>
+#include <irg/window.hpp>
 
 namespace irg {
 
@@ -41,8 +42,14 @@ namespace irg {
       terminate("Unable to initialize GLAD.");
 
     glViewport(0, 0, width, height);
-    glfwSetFramebufferSizeCallback( // resizing
-      w, [](auto*, auto const w, auto const h) { glViewport(0, 0, w, h); });
+    glfwSetFramebufferSizeCallback(w, window_events::buffer_size_callback);
+    w_events.add_listener([](auto const w, auto const h) {
+      glViewport(0, 0, w, h);
+      return ob::action::remain;
+    });
+
+    /* glfwSetFramebufferSizeCallback( // resizing
+      w, [](auto*, auto const w, auto const h) { glViewport(0, 0, w, h); }); */
 
     return w;
   }

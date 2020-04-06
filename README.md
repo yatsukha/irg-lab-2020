@@ -8,14 +8,13 @@ $ g++ -O0 -std=c++17 -g -Iinclude -ldl -lglfw -lGL src/**/*.cpp(.N) src/**/*.c(.
 
 The `(.N)` makes sure that empty matches are not reported as errors.
 
+Replace the `1/*.cpp` with some other folder if you need to compile other exercises.
+
 ## Dependancies
 
 * compiler that supports C++17 (ISO/IEC 14882:2017)
+* optarg header - provided by compiler (gcc, clang, mingw)
 * DL - Dynamic Linking Library, only needed in some cases
 * OpenGL 3.3+ - this should be supported by your drivers
 * GLM
 * GLFW3
-
-## Things you might need to replace
-
-* glad - src/glad, include/glad and include/KHR; generate using https://glad.dav1d.de/ with settings: gl version 3.3, core profile, generate loader

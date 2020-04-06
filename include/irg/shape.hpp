@@ -24,7 +24,7 @@ namespace irg {
 
    public:
     shape(shader_program const sp): sp(sp) {
-      k_events.add_listener([this](int const key) {
+      k_events.add_listener([this](int const key, auto) {
         if (!locked)
           c = key == GLFW_KEY_R // oh god what have i done
             ? colors::red

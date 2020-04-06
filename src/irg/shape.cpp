@@ -142,7 +142,7 @@ namespace irg {
       }
     });
 
-    ke.add_listener([this](int const key) {
+    ke.add_listener([this](int const key, auto) {
       if (key == GLFW_KEY_F && !shape::locked) {
         shape::locked = true;
         this->finalize();
