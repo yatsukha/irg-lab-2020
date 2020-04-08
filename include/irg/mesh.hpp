@@ -7,6 +7,7 @@
 
 #include <irg/shader.hpp>
 #include <irg/mouse.hpp>
+#include <irg/ownership.hpp>
 
 namespace irg {
 
@@ -44,9 +45,7 @@ namespace irg {
 
     void draw() const;
 
-    bool is_inside(::glm::vec3 const& v);
-
-    ~mesh();
+    bool is_inside(::glm::vec3 const& v) const;
   };
 
 }

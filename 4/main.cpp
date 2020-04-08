@@ -189,7 +189,7 @@ int main(int const argc, char* const* argv) {
       ::irg::shader("./4/shaders/light_fragment.glsl", GL_FRAGMENT_SHADER)
     })};
 
-  light_source.shader.set_uniform_matrix(
+  light_source.shader->set_uniform_matrix(
     "model",
     ::glm::scale(
       ::glm::translate(::glm::mat4(1.0f), params.light_position), 
@@ -234,15 +234,15 @@ int main(int const argc, char* const* argv) {
               << "\n";
 
   for (auto& object : objects)
-    object.shader.set_uniform_vec3("light_position", params.light_position);
+    object.shader->set_uniform_vec3("light_position", params.light_position);
 
-  objects[0].shader.transform_matrix(
+  objects[0].shader->transform_matrix(
     "model",
     ::glm::scale(::glm::mat4(1.0f), params.object_scaling));
 
   ::glm::vec3 point_scaling(0.01f);
 
-  objects[1].shader.transform_matrix( //
+  objects[1].shader->transform_matrix( //
     "model",
     ::glm::translate(
       ::glm::scale(::glm::mat4(1.0f), point_scaling), 
@@ -252,7 +252,7 @@ int main(int const argc, char* const* argv) {
     ::irg::texture tex{params.object_texture.c_str()};
     tex.use();
     for (auto& object : objects)
-      object.shader.set_uniform_int("texture_present", 1);  
+      object.shader->set_uniform_int("texture_present", 1);  
   }
 
   // object rotation
@@ -311,9 +311,9 @@ int main(int const argc, char* const* argv) {
     auto mat = ::glm::scale(::glm::mat4(1.0f), scale);
 
     for (auto& object : objects)
-      object.shader.set_uniform_matrix("screen_ratio", mat);
+      object.shader->set_uniform_matrix("screen_ratio", mat);
 
-    light_source.shader.set_uniform_matrix("screen_ratio", mat);
+    light_source.shader->set_uniform_matrix("screen_ratio", mat);
 
     return ::irg::ob::action::remain;
   });
@@ -341,21 +341,21 @@ int main(int const argc, char* const* argv) {
         ::glm::normalize(r90 * direction * (tracking_object ? -1.f : 1.f))));
 
       if (tracking_object) {
-        objects[0].shader.transform_matrix("model", mat);
+        objects[0].shader->transform_matrix("model", mat);
       } else {
         for (auto& object : objects)
-          object.shader.transform_matrix("view", mat);
-        light_source.shader.transform_matrix("view", mat);
+          object.shader->transform_matrix("view", mat);
+        light_source.shader->transform_matrix("view", mat);
       }
     }
 
     // tex.use();
 
     light_source.draw();
-    light_source.shader.set_uniform_color("light_color", c);
+    light_source.shader->set_uniform_color("light_color", c);
 
     for (auto& object : objects)
-      object.shader.set_uniform_color("light_color", c),
+      object.shader->set_uniform_color("light_color", c),
       object.draw();
 
     ::irg::assert_no_error();

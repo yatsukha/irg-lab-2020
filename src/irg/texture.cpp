@@ -9,9 +9,13 @@
 
 namespace irg {
 
-  texture::texture(char const* file) {
-    glGenTextures(1, &id);
-    glBindTexture(GL_TEXTURE_2D, id);
+  texture::texture(char const* file)
+    : id(deffer_ownership(new unsigned{}, [](unsigned* ptr) -> void {
+        glDeleteTextures(1, ptr);
+      })) 
+  {
+    glGenTextures(1, id.get());
+    glBindTexture(GL_TEXTURE_2D, *id);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
@@ -29,16 +33,12 @@ namespace irg {
 
     glTexImage2D(
         GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-
     glGenerateMipmap(GL_TEXTURE_2D);
   }
 
   void texture::use() {
-    glBindTexture(GL_TEXTURE_2D, id);
-  }
-
-  texture::~texture() {
-    //glDeleteTextures(1, &id);
+    if (id)
+      glBindTexture(GL_TEXTURE_2D, *id);
   }
 
 }

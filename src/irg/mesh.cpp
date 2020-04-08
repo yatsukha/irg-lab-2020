@@ -118,11 +118,10 @@ namespace irg {
     );
   }
 
-  bool mesh::is_inside(::glm::vec3 const& v) {
+  bool mesh::is_inside(::glm::vec3 const& v) const {
     for (auto const& [_, r] : data)
-      if (r.x * v.x + r.y * v.y + r.z * v.z + r.w > 0)
+      if (::glm::dot(r, {v, 1.0}) > 0)
         return false;
-
     return true;
   }
 
@@ -132,10 +131,6 @@ namespace irg {
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glDrawArrays(GL_TRIANGLES, 0, data.size());
     //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-  }
-
-  mesh::~mesh() {
-    // :|
   }
 
   mesh mesh::from_file(char const* mesh_file, shader_program&& mesh_shader,

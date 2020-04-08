@@ -14,16 +14,24 @@
 
 #include <irg/common.hpp>
 #include <irg/primitive.hpp>
+#include <irg/ownership.hpp>
 
 namespace irg {
 
   class shader {
+    shared_ownership<unsigned> _id;
+
    public:
     unsigned type;
-    unsigned id;
 
     shader(char const* file, int const type)
-      : type(type), id(glCreateShader(type))
+      : type(type)
+      , _id(deffer_ownership(
+          new unsigned{glCreateShader(type)}, 
+          [](auto* ptr) {
+            glDeleteShader(*ptr);
+          }
+        ))
     {
       ::std::ifstream f(file);
       if (!f.is_open())
@@ -37,40 +45,40 @@ namespace irg {
 
       const char* chars = source.c_str();
 
-      glShaderSource(id, 1, &chars, nullptr);
-      glCompileShader(id);
+      glShaderSource(*_id, 1, &chars, nullptr);
+      glCompileShader(*_id);
 
       int success;
       ::std::array<char, 512> log;
 
-      glGetShaderiv(id, GL_COMPILE_STATUS, &success);
+      glGetShaderiv(*_id, GL_COMPILE_STATUS, &success);
       if (!success)
-        glGetShaderInfoLog(id, log.max_size(), nullptr, log.data()),
+        glGetShaderInfoLog(*_id, log.max_size(), nullptr, log.data()),
         ::std::cerr << file << ": " << "\n",
         ::irg::terminate(log.data());
     }
 
-    ~shader() {
-      glDeleteShader(id);
+    unsigned id() const noexcept {
+      return *_id;
     }
   };
 
   class shader_program {
-    ::std::shared_ptr<unsigned> id;
+    shared_ownership<unsigned> id;
 
    public:
     shader_program(shader const& vertex, shader const& fragment) 
       : id(
-          ::std::shared_ptr<unsigned>(
-            new unsigned(glCreateProgram()), 
-            [](unsigned* ptr) {
-              delete ptr;
+          deffer_ownership(
+            new unsigned{glCreateProgram()}, 
+            [](auto* ptr) {
+              glDeleteProgram(*ptr);
             }
           )
         )
     {
-      glAttachShader(*id, vertex.id);
-      glAttachShader(*id, fragment.id);
+      glAttachShader(*id, vertex.id());
+      glAttachShader(*id, fragment.id());
 
       glLinkProgram(*id);
 
@@ -87,18 +95,20 @@ namespace irg {
       glUseProgram(*id);
     }
 
-    void set_uniform_int(char const* uniform_name, int const i) {
+    shader_program* operator->() noexcept {
       activate();
+      return this;
+    }
+
+    void set_uniform_int(char const* uniform_name, int const i) {
       glUniform1i(glGetUniformLocation(*id, uniform_name), i);
     }
 
     void set_uniform_color(char const* uniform_name, color const& c) {
-      activate();
       glUniform3f(glGetUniformLocation(*id, uniform_name), c.r, c.g, c.b);
     }
 
     void set_uniform_vec3(char const* uniform_name, ::glm::vec3 const &v) {
-      activate();
       glUniform3fv(
         glGetUniformLocation(*id, uniform_name), 
         1, ::glm::value_ptr(v)
@@ -106,7 +116,6 @@ namespace irg {
     }
 
     ::glm::mat4 get_uniform_matrix(char const* uniform_name) {
-      activate();
       ::std::unique_ptr<float[]> mat(new float[16]);
       glGetUniformfv(*id, glGetUniformLocation(*id, uniform_name), mat.get());
 
@@ -114,7 +123,6 @@ namespace irg {
     }
 
     void set_uniform_matrix(char const* uniform_name, ::glm::mat4 const& m) {
-      activate();
       glUniformMatrix4fv(
         glGetUniformLocation(*id, uniform_name), 
         1, GL_FALSE, ::glm::value_ptr(m)
@@ -122,7 +130,6 @@ namespace irg {
     }
 
     void transform_matrix(char const* uniform_name, ::glm::mat4 const& m) {
-      activate();
       set_uniform_matrix(uniform_name, m * get_uniform_matrix(uniform_name));
     }
     
