@@ -2,6 +2,7 @@
 
 out vec4 color;
 
+in vec2 f_tex_coords;
 in vec3 f_normal;
 in vec3 f_pos;
 in vec3 f_view_dir;
@@ -33,7 +34,7 @@ void main() {
       tex_coords.y -= 2.0;
     if (tex_coords.y < 1.0)
       tex_coords.y += 2.0;
-    c = texture(tex, tex_coords);
+    c = texture(tex, f_tex_coords);
   }
 
   color = c

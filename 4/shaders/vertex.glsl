@@ -7,12 +7,15 @@ uniform mat4 model = mat4(1.0);
 uniform mat4 view  = mat4(1.0);
 uniform mat4 screen_ratio = mat4(1.0);
 
+out vec2 f_tex_coords;
 out vec3 f_normal;
 out vec3 f_pos;
 out vec3 f_view_dir;
 
 void main() {
   vec4 tmp = model * vec4(pos, 1.0);
+
+  f_tex_coords = vec2(pos.x, pos.y);
 
   gl_Position = screen_ratio * view * tmp;
 

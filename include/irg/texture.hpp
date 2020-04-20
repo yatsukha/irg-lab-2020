@@ -8,6 +8,7 @@ namespace irg {
     shared_ownership<unsigned> id;
 
    public:
+    texture() {};
     texture(char const* path);
     void use();
   };

@@ -248,8 +248,10 @@ int main(int const argc, char* const* argv) {
       ::glm::scale(::glm::mat4(1.0f), point_scaling), 
       (params.test_vertex / point_scaling) * params.object_scaling));
 
+  ::irg::texture tex;
+
   if (params.object_texture.size()) {
-    ::irg::texture tex{params.object_texture.c_str()};
+    tex = params.object_texture.c_str();
     tex.use();
     for (auto& object : objects)
       object.shader->set_uniform_int("texture_present", 1);  
