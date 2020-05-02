@@ -1,0 +1,17 @@
+# ninja log v5
+2584	3672	1588333559706707319	main.out@exe/.._src_irg_window.cpp.o	3d858b9476133780
+19	3549	1588333559583373983	main.out@exe/.._src_irg_mesh.cpp.o	c777997ea286b18d
+2	2167	1588333558200040611	main.out@exe/.._src_stb_image.cpp.o	e3fef7c609abee1f
+4	1591	1588433996416683665	main.out@exe/main.cpp.o	e9a4b0ebd13e69f5
+1	377	1588333556413373893	main.out@exe/.._src_glad_glad.c.o	4e41186e0d50ace
+1106	3015	1588333559033373967	main.out@exe/.._src_irg_primitive.cpp.o	ad71170150d4fd48
+0	502	1588337147843475233	build.ninja	fd21e212e74a71c5
+1572	4545	1588333560580040677	main.out@exe/.._src_irg_shape.cpp.o	c32dbaf07a9a680c
+2167	3813	1588333559846707323	main.out@exe/.._src_irg_texture.cpp.o	a5f0525a5528b95a
+4	2583	1588333558616707289	main.out@exe/.._src_irg_common.cpp.o	9107a9c12622c786
+13	1572	1588333557606707260	main.out@exe/.._src_irg_keyboard.cpp.o	2545a377c2d3431
+1591	1785	1588433996610017003	main.out	d923fd3abf2f89f9
+378	3132	1588333559166707304	main.out@exe/.._src_irg_mouse.cpp.o	ac78ccbb89216014
+0	711	0	meson-asset-copy	3c6d3ea77660fd3e
+5	1610	1588434018113350943	main.out@exe/main.cpp.o	e9a4b0ebd13e69f5
+1610	1788	1588434018290017615	main.out	d923fd3abf2f89f9

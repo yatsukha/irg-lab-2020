@@ -1,0 +1,105 @@
+Build started at 2020-05-01T14:45:47.717605
+Main binary: /usr/bin/python
+Build Options: -Dbackend=ninja
+Python system: Linux
+The Meson build system
+Version: 0.54.0
+Source dir: /home/_w/Documents/Projects/Fer/6/IRG/5
+Build dir: /home/_w/Documents/Projects/Fer/6/IRG/5/build
+Build type: native build
+None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+Project name: irg
+Project version: undefined
+C compiler for the build machine: cc (gcc 9.3.0 "cc (Arch Linux 9.3.0-1) 9.3.0")
+C linker for the build machine: cc ld.bfd 2.34
+None of 'AR' are defined in the environment, not changing global flags.
+C++ compiler for the build machine: c++ (gcc 9.3.0 "c++ (Arch Linux 9.3.0-1) 9.3.0")
+C++ linker for the build machine: c++ ld.bfd 2.34
+C compiler for the host machine: cc (gcc 9.3.0 "cc (Arch Linux 9.3.0-1) 9.3.0")
+C linker for the host machine: cc ld.bfd 2.34
+None of 'AR' are defined in the environment, not changing global flags.
+C++ compiler for the host machine: c++ (gcc 9.3.0 "c++ (Arch Linux 9.3.0-1) 9.3.0")
+C++ linker for the host machine: c++ ld.bfd 2.34
+Build machine cpu family: x86_64
+Build machine cpu: x86_64
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Target machine cpu family: x86_64
+Target machine cpu: x86_64
+Dependency OpenGL found: YES unknown (cached)
+Dependency glfw3 found: YES 3.3.2 (cached)
+Pkg-config binary for MachineChoice.HOST is not cached.
+None of 'PKG_CONFIG' are defined in the environment, not changing global flags.
+Pkg-config binary missing from cross or native file, or env var undefined.
+Trying a default Pkg-config fallback at pkg-config
+Trying pkg-config binary pkg-config for machine MachineChoice.HOST at ['/usr/bin/pkg-config']
+Found pkg-config: /usr/bin/pkg-config (1.6.3)
+Determining dependency 'glm' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion glm` -> 0
+0.9.9.8
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --cflags glm` -> 0
+
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config glm --libs` -> 0
+
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config glm --libs` -> 0
+
+None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+Run-time dependency glm found: YES 0.9.9.8
+Running compile:
+Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmp1ug49eu6
+Command line:  cc /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmp1ug49eu6/testfile.c -o /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmp1ug49eu6/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -ldl -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(void) { return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Library dl found: YES
+Build targets in project: 2
+
+Found ninja-1.10.0 at /usr/bin/ninja
+Running compile:
+Working directory:  /tmp/tmp0zr996vc
+Command line:  c++ /tmp/tmp0zr996vc/testfile.cpp -o /tmp/tmp0zr996vc/output.obj -pipe -D_FILE_OFFSET_BITS=64 -c -std=c++17 
+
+Code:
+ int i = static_cast<int>(0);
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Compiler accepts -std=c++17: YES
+Running compile:
+Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpnkqxw0e6
+Command line:  c++ /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpnkqxw0e6/testfile.cpp -o /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpnkqxw0e6/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/
+programs: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib/:/lib/x86_64-pc-linux-gnu/9.3.0/:/lib/../lib/:/usr/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+Running compile:
+Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpxc6nxe0f
+Command line:  cc /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpxc6nxe0f/testfile.c -o /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpxc6nxe0f/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/
+programs: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib/:/lib/x86_64-pc-linux-gnu/9.3.0/:/lib/../lib/:/usr/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+None of 'STRIP' are defined in the environment, not changing global flags.
+None of 'STRIP' are defined in the environment, not changing global flags.
