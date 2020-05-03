@@ -29,7 +29,7 @@ namespace irg {
   }
 
   ::GLFWwindow* create_window(int const width, int const height) {
-    ::GLFWwindow* w = ::glfwCreateWindow(width, height, "", nullptr, nullptr);
+    ::GLFWwindow* w = ::glfwCreateWindow(width, height, "gl", nullptr, nullptr);
 
     if (!w)
       terminate("Unable to create a window.");

@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
+#include <thread>
+#include <chrono>
 
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -71,43 +74,6 @@ int main() {
 
   update_view_matrix();
 
-  ::std::cout << "Use WASD to move camera, arrow keys to move camera target, "
-              << "IO to move camera in and out, JK to move camera target "
-              << "in and out. Warning: the last can be quite confusing."
-              << "\n";
-
-  ::irg::k_events.add_listener(
-  [&camera](auto const key, bool const released) mutable {
-    auto adjust = [&](auto&& n) { return released ? -n : n; };
-
-    if (key == GLFW_KEY_A)
-      camera.position_mask[1] += adjust(1.0);
-    else if (key == GLFW_KEY_D)
-      camera.position_mask[1] += adjust(-1.0);
-    else if (key == GLFW_KEY_W)
-      camera.position_mask[0] += adjust(1.0);
-    else if (key == GLFW_KEY_S)
-      camera.position_mask[0] += adjust(-1.0);
-    else if (key == GLFW_KEY_I)
-      camera.zoom_mask[0] += adjust(1.0);
-    else if (key == GLFW_KEY_O)
-      camera.zoom_mask[0] += adjust(-1.0);
-    else if (key == GLFW_KEY_LEFT)
-      camera.target_mask[1] += adjust(1.0);
-    else if (key == GLFW_KEY_RIGHT)
-      camera.target_mask[1] += adjust(-1.0);
-    else if (key == GLFW_KEY_UP)
-      camera.target_mask[0] += adjust(1.0);
-    else if (key == GLFW_KEY_DOWN)
-      camera.target_mask[0] += adjust(-1.0);
-    else if (key == GLFW_KEY_J)
-      camera.zoom_mask[1] += adjust(1.0);
-    else if (key == GLFW_KEY_K)
-      camera.zoom_mask[1] += adjust(-1.0);
-
-    return ::irg::ob::action::remain;
-  });
-
   auto update_projection_matrix = [&](auto&& ratio) {
     auto proj_matrix = 
       ::glm::perspective(::glm::radians(45.0), ratio, 0.1, 100.0);
@@ -123,6 +89,29 @@ int main() {
     return ::irg::ob::action::remain;
   });
 
+  ::std::cout << "Enter the number of control points: ";
+  ::std::size_t n; ::std::cin >> n;
+  ::irg::bezier::control_points control_points(n);
+
+  ::std::cout << "Enter each control point "
+              << "(recommended values greater than 1.5): " 
+              << "\n";
+  for (auto& point : control_points)
+    ::std::cin >> point[0] >> point[1] >> point[2];
+
+  ::std::cout << "The camera will move along a Bezier curve defined with base "
+              << "functions with an order of " << n - 1 << "."
+              << "\n"; 
+
+  ::std::cout << "Waiting 2 seconds, please switch to the main window." << "\n";
+
+  using namespace ::std::chrono_literals;
+  ::std::this_thread::sleep_for(2s);
+
+  auto bezier_curve = ::irg::bezier::compute_from(control_points);
+  float t = 0.0;
+  float const delta = 0.005;
+
   glEnable(GL_DEPTH_TEST);
   auto counter = ::std::size_t{0};
 
@@ -136,7 +125,12 @@ int main() {
     light_mesh.shader->set_uniform_vec3("light_color", light_color);
     teddy_mesh.shader->set_uniform_vec3("light_color", light_color);
 
-    update_view_matrix();    
+    if (t <= 1.0f) {
+      camera.position = bezier_curve(t);
+      t += delta;
+    }
+
+    update_view_matrix();
 
     light_mesh.draw();
     teddy_mesh.draw();
