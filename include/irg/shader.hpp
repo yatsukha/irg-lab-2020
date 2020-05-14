@@ -6,7 +6,6 @@
 #include <cstring>
 #include <array>
 #include <memory>
-#include <functional>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -20,6 +19,8 @@
 namespace irg {
 
   class shader {
+    shared_ownership<unsigned> _id;
+
    public:
     unsigned type;
 
@@ -60,9 +61,6 @@ namespace irg {
     unsigned id() const noexcept {
       return *_id;
     }
-    
-   private:
-    shared_ownership<unsigned> _id; 
   };
 
   class shader_program {
@@ -100,14 +98,6 @@ namespace irg {
     shader_program* operator->() noexcept {
       activate();
       return this;
-    }
-    
-    void transform_uniform_float(char const* uniform_name,
-                                 ::std::function<float(float)> transform) {
-      auto location = glGetUniformLocation(*id, uniform_name);
-      float val;
-      glGetUniformfv(*id, location, &val);
-      glUniform1f(location, transform(val));
     }
 
     void set_uniform_int(char const* uniform_name, int const i) {
