@@ -140,6 +140,12 @@ build meson-scan-build: CUSTOM_COMMAND PHONY
 
 build scan-build: phony meson-scan-build
 
+build meson-ctags: CUSTOM_COMMAND PHONY
+ COMMAND = /usr/bin/meson --internal tags ctags /home/_w/Documents/Projects/Fer/6/IRG/5
+ pool = console
+
+build ctags: phony meson-ctags
+
 build meson-uninstall: CUSTOM_COMMAND PHONY
  COMMAND = /usr/bin/meson --internal uninstall
  pool = console

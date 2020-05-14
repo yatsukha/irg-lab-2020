@@ -1,9 +1,9 @@
-Build started at 2020-05-03T15:43:46.831273
+Build started at 2020-05-14T01:46:28.473813
 Main binary: /usr/bin/python
 Build Options: -Dbackend=ninja
 Python system: Linux
 The Meson build system
-Version: 0.54.0
+Version: 0.54.1
 Source dir: /home/_w/Documents/Projects/Fer/6/IRG/5
 Build dir: /home/_w/Documents/Projects/Fer/6/IRG/5/build
 Build type: native build
@@ -31,8 +31,55 @@ Dependency OpenGL found: YES unknown (cached)
 Dependency glfw3 found: YES 3.3.2 (cached)
 Dependency glm found: YES 0.9.9.8 (cached)
 Running compile:
-Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpsvyv9dte
-Command line:  cc /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpsvyv9dte/testfile.c -o /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpsvyv9dte/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -ldl -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpe_48sjpc
+Command line:  cc /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpe_48sjpc/testfile.c -o /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpe_48sjpc/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -ldl -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Library dl found: YES
+Build targets in project: 2
+
+Found ninja-1.10.0 at /usr/bin/ninja
+Running compile:
+Working directory:  /tmp/tmpfkcg1ny9
+Command line:  c++ /tmp/tmpfkcg1ny9/testfile.cpp -o /tmp/tmpfkcg1ny9/output.obj -pipe -D_FILE_OFFSET_BITS=64 -c -std=c++17 
+
+Code:
+ int i = static_cast<int>(0);
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Compiler accepts -std=c++17: YES
+Running compile:
+Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpzx6fnlmq
+Command line:  c++ /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpzx6fnlmq/testfile.cpp -o /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpzx6fnlmq/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/
+programs: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib/:/lib/x86_64-pc-linux-gnu/9.3.0/:/lib/../lib/:/usr/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+Running compile:
+Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpr_m6l5gj
+Command line:  cc /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpr_m6l5gj/testfile.c -o /home/_w/Documents/Projects/Fer/6/IRG/5/build/meson-private/tmpr_m6l5gj/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/
+programs: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib/:/lib/x86_64-pc-linux-gnu/9.3.0/:/lib/../lib/:/usr/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+None of 'STRIP' are defined in the environment, not changing global flags.
+None of 'STRIP' are defined in the environment, not changing global flags.
