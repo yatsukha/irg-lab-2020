@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include <cassert>
+#include <memory>
 
 #include <glm/glm.hpp>
 
@@ -172,6 +173,42 @@ namespace irg {
     
     bool is_inside(::glm::vec3 const& v) const {
       return VertexPolicy::is_inside(v, data);
+    }
+  };
+  
+  class mesh_concept {
+   private:
+    class concept {
+     public:
+      virtual void draw() = 0;
+      virtual shader_program shader() = 0;
+      virtual ~concept() = default;
+    };
+    
+    template<typename Mesh>
+    class impl : public concept {
+     public:
+       Mesh data;
+       impl(Mesh&& mesh): data(::std::forward<Mesh>(mesh)) {}
+       void draw() override {
+         data.draw();
+       }
+       shader_program shader() override {
+         return data.shader;
+       }
+    };
+    
+    ::std::unique_ptr<concept> self;
+   public:
+    template<typename Mesh>
+    mesh_concept(Mesh&& m): self(new impl<Mesh>{::std::forward<Mesh>(m)}) {}
+    
+    void draw() {
+      self->draw();
+    }
+    
+    auto shader() {
+      return self->shader();
     }
   };
   

@@ -44,8 +44,5 @@ void main() {
     f_interp_normal = t1 * normalize(triangle_A) +
                       t2 * normalize(triangle_B) +
                       t3 * normalize(triangle_C);
-
-    if (d == 0.0)
-      f_interp_normal = f_normal;
   }
 }

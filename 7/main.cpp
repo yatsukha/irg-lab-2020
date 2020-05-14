@@ -28,7 +28,7 @@ int main() {
     }
   );
 
-  auto light_position = ::glm::vec3{2.0, 2.0, 2.0};
+  auto light_position = ::glm::vec3{1.5, 0.5, 0.0};
   auto light_color    = ::glm::vec3{0.8, 0.8, 0.8};
   auto view_scaling   = ::glm::vec3(0.5);
 
@@ -45,22 +45,34 @@ int main() {
 
   light_mesh.shader->set_uniform_vec3("light_color", light_color);
 
-  auto teddy_mesh = ::irg::generic_mesh<::irg::vertex_policies::gouraud_vertex_policy>::from_file(
+  auto teddy_mesh = ::irg::generic_mesh<
+    ::irg::vertex_policies::simple_vertex_policy
+  >::from_file(
     "objects/kocka.obj",
     {
       {"shaders/vertex.glsl", GL_VERTEX_SHADER},
       {"shaders/fragment.glsl", GL_FRAGMENT_SHADER}
     }
   );
+  
+  auto teddy_mesh_gouraud = ::irg::generic_mesh<
+    ::irg::vertex_policies::gouraud_vertex_policy
+  >::from_file(
+    "objects/kocka.obj",
+    {
+      {"shaders/vertex.glsl", GL_VERTEX_SHADER},
+      {"shaders/fragment.glsl", GL_FRAGMENT_SHADER}
+    }
+  );
+    
+  teddy_mesh_gouraud.shader = teddy_mesh.shader; // ...
+  bool use_gouraud = false;
 
   teddy_mesh.shader->set_uniform_vec3("light_position", light_position);
   teddy_mesh.shader->set_uniform_vec3("light_color", light_color);
-  teddy_mesh.shader->set_uniform_int("gouraud_shading", 1);
-  
-  /*auto fur_texture = ::irg::texture("textures/bear_fur.jpg");
-  fur_texture.use();
-  
-  teddy_mesh.shader->set_uniform_int("texture_present", 1);*/
+  teddy_mesh.shader->set_uniform_int(
+    "gouraud_shading", 1
+  );
 
   auto camera = ::irg::camera{};
 
@@ -83,6 +95,8 @@ int main() {
               << "roughness components of Phong's light model. "
               << "Use left shift + above keys for inverse operations."
               << ::std::endl;
+  
+  ::std::cout << "Use G to toggle gourad shading." << ::std::endl;
   
   ::std::cout << "Note that the light pulsates, so take time to observe."
               << ::std::endl;
@@ -143,6 +157,8 @@ int main() {
         ::std::cout << "Roughness changed to: " << ret << ::std::endl;
         return ret;
       });
+    else if (key == GLFW_KEY_G && !released)
+      use_gouraud = !use_gouraud;
 
     return ::irg::ob::action::remain;
   });
@@ -175,10 +191,17 @@ int main() {
     light_mesh.shader->set_uniform_vec3("light_color", light_color);
     teddy_mesh.shader->set_uniform_vec3("light_color", light_color);
 
-    update_view_matrix();    
+    update_view_matrix();
 
     light_mesh.draw();
-    teddy_mesh.draw();
+    
+    if (!use_gouraud) {
+      teddy_mesh.shader->set_uniform_int("gouraud_shading", 0);
+      teddy_mesh.draw();
+    } else {
+      teddy_mesh.shader->set_uniform_int("gouraud_shading", 1);
+      teddy_mesh_gouraud.draw();
+    }
 
     ::irg::assert_no_error();
   });
