@@ -110,6 +110,9 @@ namespace irg {
         }
       });
     }
+    
+    polygon(::std::vector<point> const& vertices, shader_program const sp)
+      : shape(sp), vertices(vertices.begin(), vertices.begin() + N) {}
 
     void draw() const override {
       shape::draw();
