@@ -1,9 +1,9 @@
-Build started at 2020-05-03T15:44:04.299359
+Build started at 2020-05-14T18:16:52.959552
 Main binary: /usr/bin/python
-Build Options: 
+Build Options: -Dbuildtype=plain
 Python system: Linux
 The Meson build system
-Version: 0.54.0
+Version: 0.54.1
 Source dir: /home/_w/Documents/Projects/Fer/6/IRG/6
 Build dir: /home/_w/Documents/Projects/Fer/6/IRG/6/build
 Build type: native build
@@ -11,74 +11,14 @@ None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global fl
 None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
 Project name: irg
 Project version: undefined
-None of 'CC' are defined in the environment, not changing global flags.
-None of 'CFLAGS' are defined in the environment, not changing global flags.
-None of 'LDFLAGS' are defined in the environment, not changing global flags.
-None of 'CPPFLAGS' are defined in the environment, not changing global flags.
-None of 'CC_LD' are defined in the environment, not changing global flags.
-Sanity testing C compiler: cc
-Is cross compiler: False.
-Sanity check compiler command line: cc /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckc.c -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckc.exe -pipe -D_FILE_OFFSET_BITS=64
-Sanity check compile stdout:
-
------
-Sanity check compile stderr:
-
------
-Running test binary command: /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckc.exe
 C compiler for the build machine: cc (gcc 9.3.0 "cc (Arch Linux 9.3.0-1) 9.3.0")
 C linker for the build machine: cc ld.bfd 2.34
 None of 'AR' are defined in the environment, not changing global flags.
-None of 'CXX' are defined in the environment, not changing global flags.
-None of 'CXXFLAGS' are defined in the environment, not changing global flags.
-None of 'LDFLAGS' are defined in the environment, not changing global flags.
-None of 'CPPFLAGS' are defined in the environment, not changing global flags.
-None of 'CXX_LD' are defined in the environment, not changing global flags.
-Sanity testing C++ compiler: c++
-Is cross compiler: False.
-Sanity check compiler command line: c++ /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckcpp.cc -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckcpp.exe -pipe -D_FILE_OFFSET_BITS=64
-Sanity check compile stdout:
-
------
-Sanity check compile stderr:
-
------
-Running test binary command: /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckcpp.exe
 C++ compiler for the build machine: c++ (gcc 9.3.0 "c++ (Arch Linux 9.3.0-1) 9.3.0")
 C++ linker for the build machine: c++ ld.bfd 2.34
-None of 'CC' are defined in the environment, not changing global flags.
-None of 'CFLAGS' are defined in the environment, not changing global flags.
-None of 'LDFLAGS' are defined in the environment, not changing global flags.
-None of 'CPPFLAGS' are defined in the environment, not changing global flags.
-None of 'CC_LD' are defined in the environment, not changing global flags.
-Sanity testing C compiler: cc
-Is cross compiler: False.
-Sanity check compiler command line: cc /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckc.c -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckc.exe -pipe -D_FILE_OFFSET_BITS=64
-Sanity check compile stdout:
-
------
-Sanity check compile stderr:
-
------
-Running test binary command: /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckc.exe
 C compiler for the host machine: cc (gcc 9.3.0 "cc (Arch Linux 9.3.0-1) 9.3.0")
 C linker for the host machine: cc ld.bfd 2.34
 None of 'AR' are defined in the environment, not changing global flags.
-None of 'CXX' are defined in the environment, not changing global flags.
-None of 'CXXFLAGS' are defined in the environment, not changing global flags.
-None of 'LDFLAGS' are defined in the environment, not changing global flags.
-None of 'CPPFLAGS' are defined in the environment, not changing global flags.
-None of 'CXX_LD' are defined in the environment, not changing global flags.
-Sanity testing C++ compiler: c++
-Is cross compiler: False.
-Sanity check compiler command line: c++ /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckcpp.cc -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckcpp.exe -pipe -D_FILE_OFFSET_BITS=64
-Sanity check compile stdout:
-
------
-Sanity check compile stderr:
-
------
-Running test binary command: /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/sanitycheckcpp.exe
 C++ compiler for the host machine: c++ (gcc 9.3.0 "c++ (Arch Linux 9.3.0-1) 9.3.0")
 C++ linker for the host machine: c++ ld.bfd 2.34
 Build machine cpu family: x86_64
@@ -87,123 +27,12 @@ Host machine cpu family: x86_64
 Host machine cpu: x86_64
 Target machine cpu family: x86_64
 Target machine cpu: x86_64
-Pkg-config binary for MachineChoice.HOST is not cached.
-None of 'PKG_CONFIG' are defined in the environment, not changing global flags.
-Pkg-config binary missing from cross or native file, or env var undefined.
-Trying a default Pkg-config fallback at pkg-config
-Trying pkg-config binary pkg-config for machine MachineChoice.HOST at ['/usr/bin/pkg-config']
-Found pkg-config: /usr/bin/pkg-config (1.6.3)
-Determining dependency 'OpenGL' with pkg-config executable '/usr/bin/pkg-config'
-PKG_CONFIG_PATH: 
-Called `/usr/bin/pkg-config --modversion OpenGL` -> 1
-
-CMake binary for MachineChoice.HOST is not cached
-None of 'CMAKE' are defined in the environment, not changing global flags.
-CMake binary missing from cross or native file, or env var undefined.
-Trying a default CMake fallback at cmake
-Trying CMake binary cmake for machine MachineChoice.HOST at ['/usr/bin/cmake']
-Found CMake: /usr/bin/cmake (3.17.1)
-Extracting basic cmake information
-Try CMake generator: auto
-None of 'FC' are defined in the environment, not changing global flags.
-Failed to find a fortran compiler for CMake. This might cause CMake to fail.
-Called `/usr/bin/cmake --trace-expand --trace-format=json-v1 --no-warn-unused-cli --trace-redirect=cmake_trace.txt .` in /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/cmake_OpenGL -> 0
-  -- Module search paths:    ['/', '/opt', '/usr', '/usr/local']
-  -- CMake root:             /usr/share/cmake-3.17
-  -- CMake architectures:    ['libpyldb-util.cpython-38-x86-64-linux-gnu.so', 'libpyldb-util.cpython-38-x86-64-linux-gnu.so.2', 'libpyldb-util.cpython-38-x86-64-linux-gnu.so.2.0.9', 'libpytalloc-util.cpython-38-x86-64-linux-gnu.so', 'libpytalloc-util.cpython-38-x86-64-linux-gnu.so.2', 'libpytalloc-util.cpython-38-x86-64-linux-gnu.so.2.3.1', 'libsamba-policy.cpython-38-x86-64-linux-gnu.so', 'libsamba-policy.cpython-38-x86-64-linux-gnu.so.0', 'libsamba-policy.cpython-38-x86-64-linux-gnu.so.0.0.1']
-  -- CMake lib search paths: ['lib', 'lib32', 'lib64', 'libx32', 'share', 'lib/libpyldb-util.cpython-38-x86-64-linux-gnu.so', 'lib/libpyldb-util.cpython-38-x86-64-linux-gnu.so.2', 'lib/libpyldb-util.cpython-38-x86-64-linux-gnu.so.2.0.9', 'lib/libpytalloc-util.cpython-38-x86-64-linux-gnu.so', 'lib/libpytalloc-util.cpython-38-x86-64-linux-gnu.so.2', 'lib/libpytalloc-util.cpython-38-x86-64-linux-gnu.so.2.3.1', 'lib/libsamba-policy.cpython-38-x86-64-linux-gnu.so', 'lib/libsamba-policy.cpython-38-x86-64-linux-gnu.so.0', 'lib/libsamba-policy.cpython-38-x86-64-linux-gnu.so.0.0.1']
-None of 'CMAKE_PREFIX_PATH' are defined in the environment, not changing global flags.
-
-Determining dependency 'OpenGL' with CMake executable '/usr/bin/cmake'
-Try CMake generator: auto
-None of 'FC' are defined in the environment, not changing global flags.
-Failed to find a fortran compiler for CMake. This might cause CMake to fail.
-Called `/usr/bin/cmake -DNAME=OpenGL -DARCHS=libpyldb-util.cpython-38-x86-64-linux-gnu.so;libpyldb-util.cpython-38-x86-64-linux-gnu.so.2;libpyldb-util.cpython-38-x86-64-linux-gnu.so.2.0.9;libpytalloc-util.cpython-38-x86-64-linux-gnu.so;libpytalloc-util.cpython-38-x86-64-linux-gnu.so.2;libpytalloc-util.cpython-38-x86-64-linux-gnu.so.2.3.1;libsamba-policy.cpython-38-x86-64-linux-gnu.so;libsamba-policy.cpython-38-x86-64-linux-gnu.so.0;libsamba-policy.cpython-38-x86-64-linux-gnu.so.0.0.1 -DCOMPS= --trace-expand --trace-format=json-v1 --no-warn-unused-cli --trace-redirect=cmake_trace.txt .` in /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/cmake_OpenGL -> 0
-Guessed CMake target 'OpenGL::OpenGL'
-CMake TARGET:
-  -- name:      OpenGL::OpenGL
-  -- type:      UNKNOWN
-  -- imported:  True
-  -- properties: {
-      'IMPORTED_LOCATION': ['/usr/lib/libOpenGL.so']
-      'INTERFACE_INCLUDE_DIRECTORIES': ['/usr/include']
-     }
-  -- tline: CMake TRACE: /usr/share/cmake-3.17/Modules/FindOpenGL.cmake:437 add_library(['OpenGL::OpenGL', 'UNKNOWN', 'IMPORTED'])
-Include Dirs:         ['/usr/include']
-Compiler Definitions: []
-Compiler Options:     []
-Libraries:            ['/usr/lib/libOpenGL.so']
-Run-time dependency opengl found: YES
-Pkg-config binary for MachineChoice.HOST is cached.
-Determining dependency 'glfw3' with pkg-config executable '/usr/bin/pkg-config'
-PKG_CONFIG_PATH: 
-Called `/usr/bin/pkg-config --modversion glfw3` -> 0
-3.3.2
-PKG_CONFIG_PATH: 
-Called `/usr/bin/pkg-config --cflags glfw3` -> 0
-
-PKG_CONFIG_PATH: 
-Called `/usr/bin/pkg-config glfw3 --libs` -> 0
--L/usr/lib -lglfw
-PKG_CONFIG_PATH: 
-Called `/usr/bin/pkg-config glfw3 --libs` -> 0
--lglfw
-None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+Dependency OpenGL found: YES unknown (cached)
+Dependency glfw3 found: YES 3.3.2 (cached)
+Dependency glm found: YES 0.9.9.8 (cached)
 Running compile:
-Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmpw8ec9a49
-Command line:  c++ /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmpw8ec9a49/testfile.cpp -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmpw8ec9a49/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -fpermissive 
-
-Code:
- #include<stdio.h>
-        
-        int main(void) {
-            printf("%ld\n", (long)(sizeof(void *)));
-            return 0;
-        };
-Compiler stdout:
- 
-Compiler stderr:
- 
-Program stdout:
-
-8
-
-Program stderr:
-
-
-Running compile:
-Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmppcnw3z_h
-Command line:  c++ /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmppcnw3z_h/testfile.cpp -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmppcnw3z_h/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
-
-Code:
- 
-Compiler stdout:
- install: /usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/
-programs: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/
-libraries: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib/:/lib/x86_64-pc-linux-gnu/9.3.0/:/lib/../lib/:/usr/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
-
-Compiler stderr:
- 
-Run-time dependency glfw3 found: YES 3.3.2
-Pkg-config binary for MachineChoice.HOST is cached.
-Determining dependency 'glm' with pkg-config executable '/usr/bin/pkg-config'
-PKG_CONFIG_PATH: 
-Called `/usr/bin/pkg-config --modversion glm` -> 0
-0.9.9.8
-PKG_CONFIG_PATH: 
-Called `/usr/bin/pkg-config --cflags glm` -> 0
-
-PKG_CONFIG_PATH: 
-Called `/usr/bin/pkg-config glm --libs` -> 0
-
-PKG_CONFIG_PATH: 
-Called `/usr/bin/pkg-config glm --libs` -> 0
-
-None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
-Run-time dependency glm found: YES 0.9.9.8
-Running compile:
-Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmpp7bo90w0
-Command line:  cc /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmpp7bo90w0/testfile.c -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmpp7bo90w0/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -ldl -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmp0fxz5k2q
+Command line:  cc /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmp0fxz5k2q/testfile.c -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmp0fxz5k2q/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -ldl -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
@@ -216,8 +45,8 @@ Build targets in project: 2
 
 Found ninja-1.10.0 at /usr/bin/ninja
 Running compile:
-Working directory:  /tmp/tmp7luyj43h
-Command line:  c++ /tmp/tmp7luyj43h/testfile.cpp -o /tmp/tmp7luyj43h/output.obj -pipe -D_FILE_OFFSET_BITS=64 -c -std=c++17 
+Working directory:  /tmp/tmpwicliz43
+Command line:  c++ /tmp/tmpwicliz43/testfile.cpp -o /tmp/tmpwicliz43/output.obj -pipe -D_FILE_OFFSET_BITS=64 -c -std=c++17 
 
 Code:
  int i = static_cast<int>(0);
@@ -227,8 +56,21 @@ Compiler stderr:
  
 Compiler accepts -std=c++17: YES
 Running compile:
-Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmpf75_gu5m
-Command line:  cc /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmpf75_gu5m/testfile.c -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmpf75_gu5m/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
+Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmptrc15ba1
+Command line:  c++ /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmptrc15ba1/testfile.cpp -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmptrc15ba1/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/
+programs: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../x86_64-pc-linux-gnu/9.3.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib/:/lib/x86_64-pc-linux-gnu/9.3.0/:/lib/../lib/:/usr/lib/x86_64-pc-linux-gnu/9.3.0/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+Running compile:
+Working directory:  /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmp_lv997ah
+Command line:  cc /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmp_lv997ah/testfile.c -o /home/_w/Documents/Projects/Fer/6/IRG/6/build/meson-private/tmp_lv997ah/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
 
 Code:
  

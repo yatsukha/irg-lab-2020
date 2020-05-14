@@ -18,7 +18,6 @@ executable(
     '../src/stb_image.cpp',
     '../src/irg/common.cpp',
     '../src/irg/keyboard.cpp',
-    '../src/irg/mesh.cpp',
     '../src/irg/mouse.cpp',
     '../src/irg/primitive.cpp',
     '../src/irg/shape.cpp',

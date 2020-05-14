@@ -6,6 +6,7 @@
 #include <cstring>
 #include <array>
 #include <memory>
+#include <csignal>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

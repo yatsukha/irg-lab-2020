@@ -51,53 +51,49 @@ build meson-asset-copy: CUSTOM_COMMAND
 
 build main.out@exe/main.cpp.o: cpp_COMPILER ../main.cpp
  DEPFILE = main.out@exe/main.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
 build main.out@exe/.._src_glad_glad.c.o: c_COMPILER ../../src/glad/glad.c
  DEPFILE = main.out@exe/.._src_glad_glad.c.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64
 
 build main.out@exe/.._src_stb_image.cpp.o: cpp_COMPILER ../../src/stb_image.cpp
  DEPFILE = main.out@exe/.._src_stb_image.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
 build main.out@exe/.._src_irg_common.cpp.o: cpp_COMPILER ../../src/irg/common.cpp
  DEPFILE = main.out@exe/.._src_irg_common.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
 build main.out@exe/.._src_irg_keyboard.cpp.o: cpp_COMPILER ../../src/irg/keyboard.cpp
  DEPFILE = main.out@exe/.._src_irg_keyboard.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
-
-build main.out@exe/.._src_irg_mesh.cpp.o: cpp_COMPILER ../../src/irg/mesh.cpp
- DEPFILE = main.out@exe/.._src_irg_mesh.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
 build main.out@exe/.._src_irg_mouse.cpp.o: cpp_COMPILER ../../src/irg/mouse.cpp
  DEPFILE = main.out@exe/.._src_irg_mouse.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
 build main.out@exe/.._src_irg_primitive.cpp.o: cpp_COMPILER ../../src/irg/primitive.cpp
  DEPFILE = main.out@exe/.._src_irg_primitive.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
 build main.out@exe/.._src_irg_shape.cpp.o: cpp_COMPILER ../../src/irg/shape.cpp
  DEPFILE = main.out@exe/.._src_irg_shape.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
 build main.out@exe/.._src_irg_texture.cpp.o: cpp_COMPILER ../../src/irg/texture.cpp
  DEPFILE = main.out@exe/.._src_irg_texture.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
 build main.out@exe/.._src_irg_window.cpp.o: cpp_COMPILER ../../src/irg/window.cpp
  DEPFILE = main.out@exe/.._src_irg_window.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
 build main.out@exe/.._src_irg_camera.cpp.o: cpp_COMPILER ../../src/irg/camera.cpp
  DEPFILE = main.out@exe/.._src_irg_camera.cpp.o.d
- ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++17 -g
+ ARGS = -Imain.out@exe -I. -I.. -I../../include -I/usr/include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -std=c++17
 
-build main.out: cpp_LINKER main.out@exe/main.cpp.o main.out@exe/.._src_glad_glad.c.o main.out@exe/.._src_stb_image.cpp.o main.out@exe/.._src_irg_common.cpp.o main.out@exe/.._src_irg_keyboard.cpp.o main.out@exe/.._src_irg_mesh.cpp.o main.out@exe/.._src_irg_mouse.cpp.o main.out@exe/.._src_irg_primitive.cpp.o main.out@exe/.._src_irg_shape.cpp.o main.out@exe/.._src_irg_texture.cpp.o main.out@exe/.._src_irg_window.cpp.o main.out@exe/.._src_irg_camera.cpp.o | /usr/lib/libdl.a /usr/lib/libdl-2.31.so /usr/lib/libOpenGL.so /usr/lib/libglfw.so
+build main.out: cpp_LINKER main.out@exe/main.cpp.o main.out@exe/.._src_glad_glad.c.o main.out@exe/.._src_stb_image.cpp.o main.out@exe/.._src_irg_common.cpp.o main.out@exe/.._src_irg_keyboard.cpp.o main.out@exe/.._src_irg_mouse.cpp.o main.out@exe/.._src_irg_primitive.cpp.o main.out@exe/.._src_irg_shape.cpp.o main.out@exe/.._src_irg_texture.cpp.o main.out@exe/.._src_irg_window.cpp.o main.out@exe/.._src_irg_camera.cpp.o | /usr/lib/libdl.a /usr/lib/libdl-2.31.so /usr/lib/libOpenGL.so /usr/lib/libglfw.so
  LINK_ARGS = -Wl,--as-needed -Wl,--no-undefined -Wl,--start-group /usr/lib/libOpenGL.so /usr/lib/libglfw.so -ldl -Wl,--end-group
 
 # Test rules
@@ -139,6 +135,12 @@ build meson-scan-build: CUSTOM_COMMAND PHONY
  pool = console
 
 build scan-build: phony meson-scan-build
+
+build meson-ctags: CUSTOM_COMMAND PHONY
+ COMMAND = /usr/bin/meson --internal tags ctags /home/_w/Documents/Projects/Fer/6/IRG/6
+ pool = console
+
+build ctags: phony meson-ctags
 
 build meson-uninstall: CUSTOM_COMMAND PHONY
  COMMAND = /usr/bin/meson --internal uninstall
