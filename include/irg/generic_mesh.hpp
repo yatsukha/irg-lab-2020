@@ -1,5 +1,7 @@
 #pragma once
 
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 #include <utility>
 #include <sstream>
@@ -11,6 +13,18 @@
 
 #include <irg/shader.hpp>
 #include <irg/ownership.hpp>
+
+namespace std {
+  template<>
+  struct hash<::glm::vec3> {
+    ::std::size_t operator()(::glm::vec3 const& v) const noexcept {
+      auto h = ::std::hash<decltype(v.x)>{};
+      auto hash = h(v.x);
+      hash ^= h(v.y) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+      return hash ^= h(v.z) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+    };
+  };
+}
 
 namespace irg {
   
@@ -213,6 +227,174 @@ namespace irg {
       }
     };
    
+   
+    struct gouraud_vertex_policy {
+      using point_normal_pair = ::std::pair<::glm::vec3, ::glm::vec3>;
+      using attached_info = struct {
+        ::glm::vec4 normal;
+        point_normal_pair A;
+        point_normal_pair B;
+        point_normal_pair C;
+      };
+      using mesh_type = generic_mesh<gouraud_vertex_policy>;
+      
+      static mesh_type::buffer_data compute_buffer_data(
+          mesh_type::vertex_data const& vertices,
+          mesh_type::index_data const& indices) {
+        auto normal = [](auto&& a, auto&& b, auto&& c) {
+          return ::glm::cross(b - a, c - a);
+        };
+        
+        mesh_type::buffer_data data;
+        
+        ::std::unordered_map<::glm::vec3, ::std::unordered_set<::std::size_t>>
+          locations;
+        
+        for (auto i = 0; i < indices.size(); ++i) 
+          for (auto j = 1; j < indices[i].size() - 1; ++j) {
+            
+            auto n = normal(
+              vertices[indices[i][0]],
+              vertices[indices[i][j]],
+              vertices[indices[i][j + 1]]);
+            
+            ::glm::vec4 r{n, -::glm::dot(vertices[indices[i][0]], n)};
+        
+            locations[vertices[indices[i][0]]].insert(data.size());
+            data.emplace_back(
+              vertices[indices[i][0]],
+              attached_info{
+                r,
+                {vertices[indices[i][0]], {}},
+                {vertices[indices[i][j]], {}},
+                {vertices[indices[i][j + 1]], {}}
+              }
+            );
+            
+            locations[vertices[indices[i][j]]].insert(data.size());
+            data.emplace_back(
+              vertices[indices[i][j]],
+              attached_info{
+                r,
+                {vertices[indices[i][0]], {}},
+                {vertices[indices[i][j]], {}},
+                {vertices[indices[i][j + 1]], {}}
+              }
+            );
+            
+            locations[vertices[indices[i][j + 1]]].insert(data.size());
+            data.emplace_back(
+              vertices[indices[i][j + 1]],
+              attached_info{
+                r,
+                {vertices[indices[i][0]], {}},
+                {vertices[indices[i][j]], {}},
+                {vertices[indices[i][j + 1]], {}}
+              }
+            );
+          }
+          
+          
+        ::std::cout << "Calculating normals in corners..." << ::std::endl;
+        
+        ::std::unordered_map<::glm::vec3, ::glm::vec4> calculated;
+        
+        for (auto i = 0; i < data.size(); ++i) {
+          if (auto iter = calculated.find(data[i].first);
+              iter != calculated.end()) {
+            data[i].second.normal = iter->second;
+          } else {
+            ::glm::vec4 normal{0.0, 0.0, 0.0, 0.0};
+            ::std::unordered_set<::glm::vec3> added;
+            for (auto&& idx : locations[data[i].first]) {
+              auto& v = data[idx].second.normal;
+              if (!added.count(v)) {
+                normal += data[idx].second.normal;
+                added.insert(v);
+              }
+            }
+            calculated[data[i].first] = data[i].second.normal = normal;
+          }
+        }
+        
+        for (auto i = 0; i < data.size(); ++i) {
+          auto iter = locations[data[i].first].begin();
+          
+          data[i].second.A.second = ::glm::vec3(data[*iter].second.normal);
+          ++iter;
+          data[i].second.B.second = ::glm::vec3(data[*iter].second.normal);
+          ++iter;
+          data[i].second.C.second = ::glm::vec3(data[*iter].second.normal);
+        }
+        
+        return data;
+      }
+      
+      static void attrib_init(mesh_type::buffer_data const& data) {
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(
+          1, 4, GL_FLOAT, GL_FALSE,
+          sizeof(mesh_type::buffer_data::value_type),
+          reinterpret_cast<void*>(sizeof(
+            mesh_type::buffer_data::value_type::first_type
+          ))
+        );
+        
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(
+          2, 3, GL_FLOAT, GL_FALSE,
+          sizeof(mesh_type::buffer_data::value_type),
+          reinterpret_cast<void*>(sizeof(
+            mesh_type::buffer_data::value_type::first_type
+          ) + sizeof(::glm::vec4))
+        );
+        
+        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(
+          3, 3, GL_FLOAT, GL_FALSE,
+          sizeof(mesh_type::buffer_data::value_type),
+          reinterpret_cast<void*>(sizeof(
+            mesh_type::buffer_data::value_type::first_type
+          ) + sizeof(::glm::vec4) + sizeof(::glm::vec3))
+        );
+        
+        glEnableVertexAttribArray(4);
+        glVertexAttribPointer(
+          4, 3, GL_FLOAT, GL_FALSE,
+          sizeof(mesh_type::buffer_data::value_type),
+          reinterpret_cast<void*>(sizeof(
+            mesh_type::buffer_data::value_type::first_type
+          ) + sizeof(::glm::vec4) + 2 * sizeof(::glm::vec3))
+        );
+        
+        glEnableVertexAttribArray(5);
+        glVertexAttribPointer(
+          5, 3, GL_FLOAT, GL_FALSE,
+          sizeof(mesh_type::buffer_data::value_type),
+          reinterpret_cast<void*>(sizeof(
+            mesh_type::buffer_data::value_type::first_type
+          ) + sizeof(::glm::vec4) + 3 * sizeof(::glm::vec3))
+        );
+        
+        glEnableVertexAttribArray(6);
+        glVertexAttribPointer(
+          6, 3, GL_FLOAT, GL_FALSE,
+          sizeof(mesh_type::buffer_data::value_type),
+          reinterpret_cast<void*>(sizeof(
+            mesh_type::buffer_data::value_type::first_type
+          ) + sizeof(::glm::vec4) + 4 * sizeof(::glm::vec3))
+        );
+        
+        glEnableVertexAttribArray(7);
+        glVertexAttribPointer(
+          7, 3, GL_FLOAT, GL_FALSE,
+          sizeof(mesh_type::buffer_data::value_type),
+          reinterpret_cast<void*>(sizeof(
+            mesh_type::buffer_data::value_type::first_type
+          ) + sizeof(::glm::vec4) + 5 * sizeof(::glm::vec3))
+        );
+      }
+    };   
   }
   
 }

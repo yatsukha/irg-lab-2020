@@ -100,6 +100,15 @@ namespace irg {
       activate();
       return this;
     }
+    
+    void transform_uniform_float(char const* uniform_name,
+                                 ::std::function<float(float)> transform) {
+      auto location = glGetUniformLocation(*id, uniform_name);
+      float val;
+      glGetUniformfv(*id, location, &val);
+      glUniform1f(location, transform(val));
+    }
+    
 
     void set_uniform_int(char const* uniform_name, int const i) {
       glUniform1i(glGetUniformLocation(*id, uniform_name), i);
