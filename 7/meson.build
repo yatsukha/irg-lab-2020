@@ -30,7 +30,8 @@ executable(
     '../src/irg/shape.cpp',
     '../src/irg/texture.cpp',
     '../src/irg/window.cpp',
-    '../src/irg/camera.cpp'
+    '../src/irg/camera.cpp',
+    '../src/irg/scene.cpp'
   ],
   include_directories: [
     '../include'

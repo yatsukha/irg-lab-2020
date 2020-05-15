@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+#include <irg/keyboard.hpp>
+
 namespace irg {
 
   class camera {
@@ -27,6 +29,8 @@ namespace irg {
     
     ::glm::mat4 view_matrix() noexcept;
   };
+
+  ::irg::keyboard_event_type::on_press standard_camera_controler(camera& c);
 
   namespace bezier {
 

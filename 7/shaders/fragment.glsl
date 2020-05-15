@@ -36,13 +36,10 @@ void main() {
   
   vec3 reflect_direction = reflect(-light_direction, norm);
   
-  float specular = 0.0;
-  
-  if (gouraud_shading == 0)
-    specular = k_specular *
-      pow(
-        max(dot(-f_view_dir, reflect_direction), 0.0),
-        k_roughness);
+  float specular = k_specular *
+    pow(
+      max(dot(-f_view_dir, reflect_direction), 0.0),
+      k_roughness);
   
   color *=
     vec4(

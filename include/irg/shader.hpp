@@ -92,13 +92,17 @@ namespace irg {
         ::irg::terminate(log.data());
     }
 
-    void activate() noexcept {
+    shader_program& activate() noexcept {
       glUseProgram(*id);
+      return *this;
     }
 
     shader_program* operator->() noexcept {
-      activate();
-      return this;
+      return &activate();
+    }
+    
+    void set_uniform_float(char const* uniform_name, float const f) {
+      glUniform1f(glGetUniformLocation(*id, uniform_name), f);
     }
     
     void transform_uniform_float(char const* uniform_name,
