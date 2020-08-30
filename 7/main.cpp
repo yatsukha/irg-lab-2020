@@ -32,6 +32,7 @@ int main() {
       return ::glm::vec3{0.6 + sin, 0.6 + sin, 0.6 + sin};
     },
     []{
+      return ::glm::vec3{2.0, 2.0, 2.0};
       ::std::size_t static counter = 0;
       auto const val = counter++ / 50.0;
       

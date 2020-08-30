@@ -28,7 +28,7 @@ int main() {
     }
   );
 
-  auto light_position = ::glm::vec3{0.8, 0.8, 0.8};
+  auto light_position = ::glm::vec3{2.0, 2.0, 2.0};
   auto light_color    = ::glm::vec3{0.8, 0.8, 0.8};
   auto view_scaling   = ::glm::vec3(0.5);
 

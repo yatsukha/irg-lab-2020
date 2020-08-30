@@ -15,6 +15,15 @@
 #include <GLFW/glfw3.h>
 
 int main(int const argc, char** argv) {
+  if (argc < 2) {
+    ::std::cout << "Example usage: "
+                << "\"-e 1000 -m 64 -u -2,2 -v -1.2,1.2 -c 0.11,0.6O\""
+                << "\n"
+                << "-c flag is optional, specify it to generate Julia set."
+                << "\n";
+    ::std::exit(EXIT_FAILURE);
+  }
+
   auto configuration = ::irg::parse_configuration(argc, argv);
   configuration.screen_dim = {1200, 800};
   
